@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZenithDataLib
 {
-	class Activity
+	public class Activity
 	{
 		[Key]
 		public int ActivityCategoryId { get; set; }
