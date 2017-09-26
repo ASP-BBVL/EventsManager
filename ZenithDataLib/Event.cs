@@ -17,7 +17,7 @@ namespace ZenithDataLib
 
 		public string EnteredByUsername { get; set; }
 		
-		[ForeignKey]
+		[ForeignKey("Activity")]
 		public int ActivityCategory { get; set; }
 
 		public DateTime CreationDate { get; set; }

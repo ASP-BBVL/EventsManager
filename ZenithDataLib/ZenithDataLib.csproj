@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>d30b0252-7f1c-4710-8031-017004915868</ProjectGuid>
+    <ProjectGuid>b4699a0f-0949-470d-9c7c-fcd2e19e4427</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ZenithDataLib</RootNamespace>
