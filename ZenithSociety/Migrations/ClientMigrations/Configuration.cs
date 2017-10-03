@@ -3,23 +3,23 @@ namespace ZenithSociety.Migrations.ClientMigrations
 	using Microsoft.AspNet.Identity;
 	using Microsoft.AspNet.Identity.EntityFramework;
 	using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+	using System.Data.Entity;
+	using System.Data.Entity.Migrations;
+	using System.Linq;
 	using ZenithSociety.Models;
 
 	internal sealed class Configuration : DbMigrationsConfiguration<ZenithSociety.Models.ApplicationDbContext>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"Migrations\ClientMigrations";
-        }
+	{
+		public Configuration()
+		{
+			AutomaticMigrationsEnabled = false;
+			MigrationsDirectory = @"Migrations\ClientMigrations";
+		}
 
-        protected override void Seed(ApplicationDbContext context)
-        {
+		protected override void Seed(ApplicationDbContext context)
+		{
 			var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            if(!roleManager.RoleExists("Admin"))
+			if (!roleManager.RoleExists("Admin"))
 			{
 				roleManager.Create(new IdentityRole("Admin"));
 			}
@@ -27,8 +27,8 @@ namespace ZenithSociety.Migrations.ClientMigrations
 			{
 				roleManager.Create(new IdentityRole("Member"));
 			}
-			var userManager = new UserManager<ApplicationUser>(new UserStore<Models.ApplicationUser>(context)); 
-			if(userManager.FindByName("a@a.a") == null )
+			var userManager = new UserManager<ApplicationUser>(new UserStore<Models.ApplicationUser>(context));
+			if (userManager.FindByName("a@a.a") == null)
 			{
 				var user = new ApplicationUser
 				{
@@ -36,9 +36,9 @@ namespace ZenithSociety.Migrations.ClientMigrations
 					UserName = "a@a.a"
 				};
 				var result = userManager.Create(user, "P@$$w0rd");
-				if(result.Succeeded)
+				if (result.Succeeded)
 				{
-					userManager.AddToRole("Admin");
+					userManager.AddToRole(user.Id, "Admin");
 				}
 			}
 			if (userManager.FindByName("m@m.m") == null)
@@ -51,9 +51,9 @@ namespace ZenithSociety.Migrations.ClientMigrations
 				var result = userManager.Create(user, "P@$$w0rd");
 				if (result.Succeeded)
 				{
-					userManager.AddToRole("Member");
+					userManager.AddToRole(user.Id, "Member");
 				}
 			}
 		}
-    }
+	}
 }
