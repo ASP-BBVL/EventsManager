@@ -10,6 +10,18 @@ namespace ZenithSociety.Controllers
 	{
 		public ActionResult Index()
 		{
+			var dates = new List<DateTime>();
+
+			//TODO get current date => Week
+			var today = DateTime.Now; 
+			if(today.DayOfWeek != DayOfWeek.Monday)
+			{
+				int delta = DayOfWeek.Monday - today.DayOfWeek;
+				DateTime monday = today.AddDays(delta);
+			}
+			//TODO collect events within current week
+
+			ViewBag.WeekDates = dates;
 			return View();
 		}
 
