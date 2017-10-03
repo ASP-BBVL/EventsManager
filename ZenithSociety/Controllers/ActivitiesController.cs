@@ -36,8 +36,9 @@ namespace ZenithSociety.Controllers
             return View(activity);
         }
 
-        // GET: Activities/Create
-        public ActionResult Create()
+		// GET: Activities/Create
+		[Authorize]
+		public ActionResult Create()
         {
             return View();
         }
@@ -47,7 +48,8 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
+		[Authorize]
+		public ActionResult Create([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -59,8 +61,9 @@ namespace ZenithSociety.Controllers
             return View(activity);
         }
 
-        // GET: Activities/Edit/5
-        public ActionResult Edit(int? id)
+		// GET: Activities/Edit/5
+		[Authorize]
+		public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -79,7 +82,8 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
+		[Authorize]
+		public ActionResult Edit([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -90,8 +94,9 @@ namespace ZenithSociety.Controllers
             return View(activity);
         }
 
-        // GET: Activities/Delete/5
-        public ActionResult Delete(int? id)
+		// GET: Activities/Delete/5
+		[Authorize]
+		public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -108,7 +113,8 @@ namespace ZenithSociety.Controllers
         // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+		[Authorize]
+		public ActionResult DeleteConfirmed(int id)
         {
             Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);

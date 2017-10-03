@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -37,8 +39,9 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // GET: Events/Create
-        public ActionResult Create()
+		// GET: Events/Create
+		[Authorize]
+		public ActionResult Create()
         {
             ViewBag.ActivityCategory = new SelectList(db.Activities, "ActivityCategoryId", "ActivityDescription");
             return View();
@@ -49,10 +52,15 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
+		[Authorize]
+		public ActionResult Create([Bind(Include = "EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
         {
             if (ModelState.IsValid)
             {
+				var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+				var userManager = new UserManager<ApplicationUser>(store);
+				var user = userManager.FindById(User.Identity.GetUserId());
+				@event.EnteredByUsername = user.UserName;
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -62,8 +70,9 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // GET: Events/Edit/5
-        public ActionResult Edit(int? id)
+		// GET: Events/Edit/5
+		[Authorize]
+		public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -83,7 +92,8 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
+		[Authorize]
+		public ActionResult Edit([Bind(Include = "EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -95,8 +105,9 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-        // GET: Events/Delete/5
-        public ActionResult Delete(int? id)
+		// GET: Events/Delete/5
+		[Authorize]
+		public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -113,7 +124,8 @@ namespace ZenithSociety.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+		[Authorize]
+		public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);
             db.Events.Remove(@event);

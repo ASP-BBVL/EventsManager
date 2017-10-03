@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ZenithDataLib
 {
@@ -23,22 +25,25 @@ namespace ZenithDataLib
 		[Required(ErrorMessage = "End date is required!")]
 		public DateTime EndDate { get; set; }
 
-		[Display(Name = "Created By")]
-		public string EnteredByUsername { get; set; }
+		private string _EnteredByUsername = "";
+		[HiddenInput(DisplayValue = true)]
+		[Display(Name = "Entered By")]
+		public string EnteredByUsername { get { return _EnteredByUsername; } set { _EnteredByUsername = value; } }
 
 		[ForeignKey("Activity")]
-		[Display(Name = "Activity Type")]
+		[Display(Name = "Activity Name")]
 		[Required(ErrorMessage = "Activity type is required!")]
 		public int ActivityCategory { get; set; }
 
+		private DateTime _CreationDate = DateTime.Now;
 		[DataType(DataType.Date)]
-		[Display(Name = "Date Created")]
-		public DateTime CreationDate { get; set; }
+		[HiddenInput(DisplayValue = true)]
+		[Display(Name = "Creation Date")]
+		public DateTime CreationDate { get { return _CreationDate; } set { _CreationDate = value; } }
 
 		public Activity Activity { get; set; }
 
 		[Display(Name = "Active")]
-		[Required(ErrorMessage = "Must be set active or inactive")]
 		public Boolean IsActive { get; set; }
 	}
 }
