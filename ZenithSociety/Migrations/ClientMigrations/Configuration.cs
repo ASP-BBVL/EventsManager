@@ -23,9 +23,9 @@ namespace ZenithSociety.Migrations.ClientMigrations
 			{
 				roleManager.Create(new IdentityRole("Admin"));
 			}
-			if (!roleManager.RoleExists("Guest"))
+			if (!roleManager.RoleExists("Member"))
 			{
-				roleManager.Create(new IdentityRole("Guest"));
+				roleManager.Create(new IdentityRole("Member"));
 			}
 			var userManager = new UserManager<ApplicationUser>(new UserStore<Models.ApplicationUser>(context)); 
 			if(userManager.FindByName("a@a.a") == null )
@@ -38,7 +38,20 @@ namespace ZenithSociety.Migrations.ClientMigrations
 				var result = userManager.Create(user, "P@$$w0rd");
 				if(result.Succeeded)
 				{
-					
+					userManager.AddToRole("Admin");
+				}
+			}
+			if (userManager.FindByName("m@m.m") == null)
+			{
+				var user = new ApplicationUser
+				{
+					Email = "m@m.m",
+					UserName = "m@m.m"
+				};
+				var result = userManager.Create(user, "P@$$w0rd");
+				if (result.Succeeded)
+				{
+					userManager.AddToRole("Member");
 				}
 			}
 		}
