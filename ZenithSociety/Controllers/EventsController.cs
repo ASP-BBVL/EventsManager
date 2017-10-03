@@ -18,7 +18,7 @@ namespace ZenithSociety.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            var events = db.Events.Include(@ => @.Activity);
+            var events = db.Events.Include(e => e.Activity);
             return View(events.ToList());
         }
 
