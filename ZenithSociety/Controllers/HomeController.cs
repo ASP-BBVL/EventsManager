@@ -3,26 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using ZenithDataLib;
+using ZenithSociety.Models;
 
 namespace ZenithSociety.Controllers
 {
 	public class HomeController : Controller
 	{
+		private ApplicationDbContext db = new ApplicationDbContext();
 		public ActionResult Index()
 		{
-			var dates = new List<DateTime>();
-
+			var dates = new Dictionary<DateTime, List<Event>>();
 			//TODO get current date => Week
-			var today = DateTime.Now; 
-			if(today.DayOfWeek != DayOfWeek.Monday)
+			var today = DateTime.Now;
+			if (today.DayOfWeek != DayOfWeek.Monday)
 			{
 				int delta = DayOfWeek.Monday - today.DayOfWeek;
-				DateTime monday = today.AddDays(delta);
+				today.AddDays(delta);
 			}
-			//TODO collect events within current week
-
-			ViewBag.WeekDates = dates;
-			return View();
+			System.Diagnostics.Debug.WriteLine(today.ToShortDateString());
+			while (today.DayOfWeek != DayOfWeek.Sunday)
+			{
+				var events = db.Events.Include(e => e.Activity).Where(e => e.StartDate.Day == today.Day && e.StartDate.Month == today.Month && e.StartDate.Year == today.Year).ToList();
+				dates.Add(today, events);
+				today = today.AddDays(1);
+			}
+			return View(dates);
 		}
 
 		public ActionResult About()
