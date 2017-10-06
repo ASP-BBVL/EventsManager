@@ -19,8 +19,15 @@ namespace ZenithSociety.Controllers
 			var today = DateTime.Now;
 			if (today.DayOfWeek != DayOfWeek.Monday)
 			{
-				int delta = DayOfWeek.Monday - today.DayOfWeek;
-				today.AddDays(delta);
+                int delta = 0;
+                if(today.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    delta = -6; 
+                } else
+                {
+                    delta = DayOfWeek.Monday - today.DayOfWeek;
+                }
+				today = today.AddDays(delta);
 			}
 			System.Diagnostics.Debug.WriteLine(today.ToShortDateString());
 			while (today.DayOfWeek != DayOfWeek.Sunday)
