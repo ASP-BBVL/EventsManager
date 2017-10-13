@@ -192,9 +192,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ClientMigrations\201710032010137_PInitialCreate.cs" />
-    <Compile Include="Migrations\ClientMigrations\201710032010137_PInitialCreate.Designer.cs">
-      <DependentUpon>201710032010137_PInitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\ClientMigrations\201710130550019_InitialCreate.cs" />
+    <Compile Include="Migrations\ClientMigrations\201710130550019_InitialCreate.Designer.cs">
+      <DependentUpon>201710130550019_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ClientMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -206,6 +206,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Docs\Migrations.txt" />
+    <Content Include="Docs\README.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -296,8 +298,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ClientMigrations\201710032010137_PInitialCreate.resx">
-      <DependentUpon>201710032010137_PInitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ClientMigrations\201710130550019_InitialCreate.resx">
+      <DependentUpon>201710130550019_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
