@@ -15,12 +15,12 @@ namespace ZenithDataLib
 		[Key]
 		public int EventId { get; set; }
 
-		[DataType(DataType.Date)]
+		[DataType(DataType.DateTime)]
 		[Display(Name = "Start Date")]
 		[Required(ErrorMessage = "Start date is required!")]
-		public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-		[DataType(DataType.Date)]
+		[DataType(DataType.DateTime)]
 		[Display(Name = "End Date")]
 		[Required(ErrorMessage = "End date is required!")]
 		public DateTime EndDate { get; set; }
