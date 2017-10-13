@@ -1,0 +1,20 @@
+﻿Migrations Commands
+
+//update package dependencies
+Update-Package -reinstall
+
+//enable migrations
+enable-migrations -ContextProjectName ZenithSociety -StartUpProjectName ZenithSociety -ContextTypeName ZenithSociety.Models.ApplicationDbContext -ProjectName ZenithSociety -MigrationsDirectory "Migrations/ClientMigrations"
+
+//You should see the following message
+"Checking if the context targets an existing database...
+Code First Migrations enabled for project ZenithSociety."
+
+//If you have already enabled migrations, and are troubleshooting, roll it back
+Update-Database -TargetMigration "0"
+
+//Finally, update the database.
+update-database -Verbose
+
+This should create the necessary tables, and Run the seed method
+

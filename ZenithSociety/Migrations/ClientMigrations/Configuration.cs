@@ -14,7 +14,7 @@ namespace ZenithSociety.Migrations.ClientMigrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Migrations\ClientMigrations";
         }
 
@@ -30,7 +30,7 @@ namespace ZenithSociety.Migrations.ClientMigrations
                 roleManager.Create(new IdentityRole("Member"));
             }
             var userManager = new UserManager<ApplicationUser>(new UserStore<Models.ApplicationUser>(context));
-            if (userManager.FindByName("a@a.a") == null)
+            if (userManager.FindByName("a") == null)
             {
                 var user = new ApplicationUser
                 {
@@ -43,7 +43,7 @@ namespace ZenithSociety.Migrations.ClientMigrations
                     userManager.AddToRole(user.Id, "Admin");
                 }
             }
-            if (userManager.FindByName("m@m.m") == null)
+            if (userManager.FindByName("m") == null)
             {
                 var user = new ApplicationUser
                 {
@@ -181,69 +181,69 @@ namespace ZenithSociety.Migrations.ClientMigrations
                 {
                     ActivityDescription = "Senior’s Golf Tournament"
                 },
-                
+
                 new Activity()
                 {
                     ActivityDescription = "Leadership General Assembly Meeting"
                 },
-                 
+
                 new Activity()
                 {
                     ActivityDescription = "Youth Bowling Tournament"
                 },
-                  
+
                 new Activity()
                 {
                     ActivityDescription = "Young ladies cooking lessons"
                 },
-             
+
                 new Activity()
                 {
                     ActivityDescription = "Youth craft lessons"
                 },
-                  
+
                 new Activity()
                 {
                     ActivityDescription = "Youth choir practice"
                 },
-                  
+
                 new Activity()
                 {
                     ActivityDescription = "Lunch"
                 },
-                  
+
                 new Activity()
                 {
                     ActivityDescription = "Pancake Breakfast"
                 },
-                
-                
+
+
                 new Activity()
                 {
                     ActivityDescription = "Swimming Lessons for the youth"
                 },
-                  
-                
+
+
                 new Activity()
                 {
                     ActivityDescription = "Swimming Exercise for parents"
                 },
-                  
+
                 new Activity()
                 {
                     ActivityDescription = "Bingo Tournament"
                 },
-                 
+
                 new Activity()
                 {
                     ActivityDescription = "BBQ Lunch"
                 },
-                 
+
                 new Activity()
                 {
                     ActivityDescription = "Garage Sale"
                 }
-                  
+
             };
             return activities;
         }
@@ -252,7 +252,7 @@ namespace ZenithSociety.Migrations.ClientMigrations
         {
             UserSeed(context);
             context.Activities.AddOrUpdate(
-                a=> new { a.ActivityCategoryId },
+                a => new { a.ActivityCategoryId },
                 getActivities().ToArray()
                 );
             context.SaveChanges();
