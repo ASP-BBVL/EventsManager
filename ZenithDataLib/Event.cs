@@ -18,7 +18,7 @@ namespace ZenithDataLib
 		[DataType(DataType.DateTime)]
 		[Display(Name = "Start Date")]
 		[Required(ErrorMessage = "Start date is required!")]
-        	public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
 		[DataType(DataType.DateTime)]
 		[Display(Name = "End Date")]
