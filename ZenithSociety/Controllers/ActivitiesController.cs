@@ -36,9 +36,9 @@ namespace ZenithSociety.Controllers
             return View(activity);
         }
 
-		// GET: Activities/Create
-		[Authorize]
-		public ActionResult Create()
+        // GET: Activities/Create
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create()
         {
             return View();
         }
@@ -48,8 +48,8 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize]
-		public ActionResult Create([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -61,9 +61,9 @@ namespace ZenithSociety.Controllers
             return View(activity);
         }
 
-		// GET: Activities/Edit/5
-		[Authorize]
-		public ActionResult Edit(int? id)
+        // GET: Activities/Edit/5
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -82,8 +82,8 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize]
-		public ActionResult Edit([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit([Bind(Include = "ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -94,9 +94,9 @@ namespace ZenithSociety.Controllers
             return View(activity);
         }
 
-		// GET: Activities/Delete/5
-		[Authorize]
-		public ActionResult Delete(int? id)
+        // GET: Activities/Delete/5
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -113,8 +113,8 @@ namespace ZenithSociety.Controllers
         // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-		[Authorize]
-		public ActionResult DeleteConfirmed(int id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteConfirmed(int id)
         {
             Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);
