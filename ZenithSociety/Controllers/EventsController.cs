@@ -18,7 +18,7 @@ namespace ZenithSociety.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
-
+        [Authorize]
         public ActionResult Index()
         {
             var events = db.Events.Include(e => e.Activity);

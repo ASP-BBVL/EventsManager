@@ -16,6 +16,7 @@ namespace ZenithSociety.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Activities
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Activities.ToList());
