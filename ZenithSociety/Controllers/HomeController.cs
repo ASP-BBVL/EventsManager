@@ -32,7 +32,7 @@ namespace ZenithSociety.Controllers
 			System.Diagnostics.Debug.WriteLine(today.ToShortDateString());
 			while (today.DayOfWeek != DayOfWeek.Sunday)
 			{
-				var events = db.Events.Include(e => e.Activity).Where(e => e.StartDate.Day == today.Day && e.StartDate.Month == today.Month && e.StartDate.Year == today.Year).ToList();
+				var events = db.Events.Include(e => e.Activity).Where(e => e.StartDate.Day == today.Day && e.StartDate.Month == today.Month && e.StartDate.Year == today.Year && e.IsActive).ToList();
 				dates.Add(today, events);
 				today = today.AddDays(1);
 			}
