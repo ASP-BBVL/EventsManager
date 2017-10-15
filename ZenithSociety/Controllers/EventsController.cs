@@ -18,6 +18,7 @@ namespace ZenithSociety.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
+        [Authorize]
         public ActionResult Index()
         {
             var events = db.Events.Include(e => e.Activity);
@@ -40,7 +41,7 @@ namespace ZenithSociety.Controllers
         }
 
 		// GET: Events/Create
-		[Authorize]
+		[Authorize(Roles ="Admin")]
 		public ActionResult Create()
         {
             ViewBag.ActivityCategory = new SelectList(db.Activities, "ActivityCategoryId", "ActivityDescription");
@@ -52,7 +53,7 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize]
+		[Authorize(Roles ="Admin")]
 		public ActionResult Create([Bind(Include = "EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
         {
             if (ModelState.IsValid)
@@ -71,7 +72,7 @@ namespace ZenithSociety.Controllers
         }
 
 		// GET: Events/Edit/5
-		[Authorize]
+		[Authorize(Roles ="Admin")]
 		public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -92,7 +93,7 @@ namespace ZenithSociety.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize]
+		[Authorize(Roles ="Admin")]
 		public ActionResult Edit([Bind(Include = "EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
         {
             if (ModelState.IsValid)
@@ -105,9 +106,9 @@ namespace ZenithSociety.Controllers
             return View(@event);
         }
 
-		// GET: Events/Delete/5
-		[Authorize]
-		public ActionResult Delete(int? id)
+        // GET: Events/Delete/5
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -122,7 +123,7 @@ namespace ZenithSociety.Controllers
         }
 
         // POST: Events/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
 		[Authorize]
 		public ActionResult DeleteConfirmed(int id)

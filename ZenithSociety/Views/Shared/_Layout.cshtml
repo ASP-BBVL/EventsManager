@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Zenith Society</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
 
 </head>
 <body>
@@ -21,9 +22,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
                     <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
                     <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
