@@ -1,0 +1,46 @@
+#home-wrapper {
+    height:100%;
+    margin-top:0;
+}
+#landing-jumbotron {
+    background-image: url("http://www.clubcorp.com/var/ezflow_site/storage/images/media/clubs/oakmont-media-folder2/images/hmpg-images/2015-updated-photos/oakmontcountryclub-corinth-tx-patio-960x410/10661847-1-eng-US/OakmontCountryClub-Corinth-TX-patio-960x410_rotatingGalleryFront.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 3;
+    width:100%;
+    position:relative;
+    height:100%;
+}
+#landing-jumbotron:after {
+    content: "";
+    height:100%;    
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+    background: linear-gradient(
+        rgba(20,20,20, .2), 
+        rgba(20,20,20, .6));
+}
+#landing-info {
+    width:80%;
+    margin: 0 auto;
+    text-align: left;
+}
+#landing-info > .header, #landing-info > .header > .sub.header {
+    color:white;
+}
+.home-section:nth-child(2) {
+    min-height:500px;
+}
+.home-section:nth-child(2) > div {
+    margin-top: 35px;
+}
+#landing-events-info {
+    width:80%;
+    margin:0 auto;
+    text-align:center;
+}
