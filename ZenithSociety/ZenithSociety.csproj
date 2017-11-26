@@ -380,12 +380,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZenithDataLib\ZenithDataLib.csproj">
-      <Project>{b4699a0f-0949-470d-9c7c-fcd2e19e4427}</Project>
-      <Name>ZenithDataLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\ClientMigrations\201710130550019_InitialCreate.resx">
       <DependentUpon>201710130550019_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>

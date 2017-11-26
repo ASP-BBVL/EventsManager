@@ -13,7 +13,7 @@ namespace ZenithSociety.Controllers
 	{
 		private ApplicationDbContext db = new ApplicationDbContext();
 		public ActionResult Index()
-		{
+		{http://localhost:60461/Properties/
 			var dates = new Dictionary<DateTime, List<Event>>();
 			//TODO get current date => Week
 			var today = DateTime.Now;
