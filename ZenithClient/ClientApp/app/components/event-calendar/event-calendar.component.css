@@ -1,10 +1,22 @@
 .calendar-container {
     width: 80%;
     margin: 0 auto;
+    height:500px;
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
+
 @media screen and (max-width: 480px) {
     .calendar-container {
         width:100%;
-        margin-top: 30px;
+        height:300px;
+    }
+    #calendar-nav--weekof {
+        font-size:12px;
+        padding-left:6px;
+        padding-right:6px;
+    }
+    app-event-calendar {
+        padding-right:0 !important;
     }
 }

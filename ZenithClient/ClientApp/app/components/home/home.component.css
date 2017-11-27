@@ -33,14 +33,23 @@
 #landing-info > .header, #landing-info > .header > .sub.header {
     color:white;
 }
+.home-section {
+    margin-left:0 !important;
+}
 .home-section:nth-child(2) {
     min-height:500px;
 }
-.home-section:nth-child(2) > div {
-    margin-top: 35px;
+.home-section:nth-child(2) > div, .home-section:nth-child(2) > app-event-calendar {
+    margin-top:80px;
+    vertical-align:top;
 }
 #landing-events-info {
     width:80%;
     margin:0 auto;
     text-align:center;
+}
+@media screen and (max-width: 480px) {
+    app-event-calendar {
+        padding-right:0 !important;
+    }
 }
