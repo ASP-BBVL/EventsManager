@@ -7,10 +7,11 @@
     <base href="~/" />
 
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dist/semantic/semantic.min.css" asp-append-version="true" />
 </head>
 <body>
     @RenderBody()
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
