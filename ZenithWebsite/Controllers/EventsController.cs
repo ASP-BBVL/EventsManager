@@ -8,15 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using ZenithWebsite.Data;
 using ZenithWebsite.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ZenithWebsite.Controllers
 {
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public EventsController(ApplicationDbContext context)
+        public EventsController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager)
         {
+            _signInManager = signInManager;
             _context = context;
         }
 
@@ -61,10 +64,12 @@ namespace ZenithWebsite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
+        public async Task<IActionResult> Create([Bind("StartDate,EndDate,ActivityCategory,IsActive")] Event @event)
         {
             if (ModelState.IsValid)
             {
+                var User = await _signInManager.UserManager.GetUserAsync(HttpContext.User);
+                @event.EnteredByUsername = User?.UserName;
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

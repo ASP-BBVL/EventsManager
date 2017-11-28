@@ -25,12 +25,12 @@ namespace ZenithWebsite.Data
             }
             if (!db.Activities.Any())
             {
-                db.Activities.AddRange(getActivities().ToArray());
+                db.Activities.AddRange(GetActivities().ToArray());
                 db.SaveChanges();
             }
             if (!db.Events.Any())
             {
-                db.Events.AddRange(getEvents(db).ToArray());
+                db.Events.AddRange(GetEvents(db).ToArray());
                 db.SaveChanges();
             }
         }
@@ -75,121 +75,744 @@ namespace ZenithWebsite.Data
             }
         }
 
-        public static List<Event> getEvents(ApplicationDbContext context)
+        public static List<Event> GetEvents(ApplicationDbContext context)
         {
             List<Event> events = new List<Event>()
             {
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Senior’s Golf Tournament")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 17, 8, 30, 0),
-                    EndDate = new DateTime(2017, 10, 17, 10, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Senior’s Golf Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 22, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 22, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Leadership General Assembly Meeting")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 18, 8, 30, 0),
-                    EndDate = new DateTime(2017, 10, 18, 10, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Leadership General Assembly Meeting"
+                    },
+                    StartDate = new DateTime(2017, 12, 24, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 24, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Youth Bowling Tournament")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 20, 17, 30, 0),
-                    EndDate = new DateTime(2017, 10, 20, 19, 15, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth Bowling Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 14, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 14, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Young ladies cooking lessons")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 20, 19, 00, 0),
-                    EndDate = new DateTime(2017, 10, 20, 20, 00, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Young ladies cooking lessons"
+                    },
+                    StartDate = new DateTime(2017, 12, 16, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 16, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Youth craft lessons")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 21, 8, 30, 0),
-                    EndDate = new DateTime(2017, 10, 21, 10, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth craft lessons"
+                    },
+                    StartDate = new DateTime(2017, 12, 11, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 11, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                   ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Youth choir practice")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 21, 10, 30, 0),
-                    EndDate = new DateTime(2017, 10, 21, 12, 00, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth choir practice"
+                    },
+                    StartDate = new DateTime(2017, 12, 19, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 19, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                   ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Lunch")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 21, 12, 00, 0),
-                    EndDate = new DateTime(2017, 10, 21, 13, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Lunch Sunday"
+                    },
+                    StartDate = new DateTime(2017, 12, 21, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 21, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Pancake Breakfast")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 22, 7, 30, 0),
-                    EndDate = new DateTime(2017, 10, 22, 8, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Pancake Breakfast"
+                    },
+                    StartDate = new DateTime(2017, 12, 17, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 17, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                   ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Swimming Lessons for the youth")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 22, 8, 30, 0),
-                    EndDate = new DateTime(2017, 10, 22, 10, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Lessons for the youth"
+                    },
+                    StartDate = new DateTime(2017, 12, 24, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 24, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Swimming Exercise for parents")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 22, 8, 30, 0),
-                    EndDate = new DateTime(2017, 10, 22, 10, 30, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Exercise for parents"
+                    },
+                    StartDate = new DateTime(2017, 12, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 28, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                   ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Bingo Tournament")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 22, 10, 30, 0),
-                    EndDate = new DateTime(2017, 10, 22, 12, 00, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Bingo Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 10, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 10, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                   ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("BBQ Lunch")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 22, 12, 00, 0),
-                    EndDate = new DateTime(2017, 10, 22, 13, 00, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "BBQ Lunch"
+                    },
+                    StartDate = new DateTime(2017, 12, 3, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 3, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
                 new Event()
                 {
-                    ActivityCategory = context.Activities.FirstOrDefault(a=> a.ActivityDescription.Equals("Garage Sale")).ActivityCategoryId,
-                    StartDate = new DateTime(2017, 10, 22, 13, 00, 0),
-                    EndDate = new DateTime(2017, 10, 22, 18, 00, 0),
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Garage Sale"
+                    },
+                    StartDate = new DateTime(2017, 12, 26, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 26, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Senior’s Golf Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 22, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 22, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Leadership General Assembly Meeting"
+                    },
+                    StartDate = new DateTime(2017, 12, 24, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 24, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth Bowling Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 14, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 14, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Young ladies cooking lessons"
+                    },
+                    StartDate = new DateTime(2017, 12, 16, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 16, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth craft lessons"
+                    },
+                    StartDate = new DateTime(2017, 12, 11, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 11, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth choir practice"
+                    },
+                    StartDate = new DateTime(2017, 12, 19, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 19, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Lunch Sunday"
+                    },
+                    StartDate = new DateTime(2017, 12, 21, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 21, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Pancake Breakfast"
+                    },
+                    StartDate = new DateTime(2017, 12, 17, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 17, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Lessons for the youth"
+                    },
+                    StartDate = new DateTime(2017, 12, 24, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 24, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Exercise for parents"
+                    },
+                    StartDate = new DateTime(2017, 12, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Bingo Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 10, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 10, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "BBQ Lunch"
+                    },
+                    StartDate = new DateTime(2017, 12, 3, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 3, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Garage Sale"
+                    },
+                    StartDate = new DateTime(2017, 12, 26, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 26, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Senior’s Golf Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 26, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 26, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Leadership General Assembly Meeting"
+                    },
+                    StartDate = new DateTime(2017, 12, 6, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 6, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth Bowling Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 25, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 25, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Young ladies cooking lessons"
+                    },
+                    StartDate = new DateTime(2017, 12, 20, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 20, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth craft lessons"
+                    },
+                    StartDate = new DateTime(2017, 12, 11, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 11, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth choir practice"
+                    },
+                    StartDate = new DateTime(2017, 12, 1, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 30, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Lunch Sunday"
+                    },
+                    StartDate = new DateTime(2017, 12, 19, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 19, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Pancake Breakfast"
+                    },
+                    StartDate = new DateTime(2017, 12, 1, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 1, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Lessons for the youth"
+                    },
+                    StartDate = new DateTime(2017, 12, 21, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 21, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Exercise for parents"
+                    },
+                    StartDate = new DateTime(2017, 12, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Bingo Tournament"
+                    },
+                    StartDate = new DateTime(2017, 12, 16, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 16, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "BBQ Lunch"
+                    },
+                    StartDate = new DateTime(2017, 12, 22, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 22, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Garage Sale"
+                    },
+                    StartDate = new DateTime(2017, 12, 14, 12, 00, 0),
+                    EndDate = new DateTime(2017, 12, 14, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Garage Sale"
+                    },
+                    StartDate = new DateTime(2017, 11, 30, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 30, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Senior’s Golf Tournament"
+                    },
+                    StartDate = new DateTime(2017, 11, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Leadership General Assembly Meeting"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth Bowling Tournament"
+                    },
+                    StartDate = new DateTime(2017, 11, 27, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 27, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Young ladies cooking lessons"
+                    },
+                    StartDate = new DateTime(2017, 11, 27, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 27, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth craft lessons"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth choir practice"
+                    },
+                    StartDate = new DateTime(2017, 11, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Lunch Sunday"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Pancake Breakfast"
+                    },
+                    StartDate = new DateTime(2017, 11, 27, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 27, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Lessons for the youth"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Exercise for parents"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Bingo Tournament"
+                    },
+                    StartDate = new DateTime(2017, 11, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "BBQ Lunch"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Garage Sale"
+                    },
+                    StartDate = new DateTime(2017, 11, 27, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 27, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Senior’s Golf Tournament"
+                    },
+                    StartDate = new DateTime(2017, 11, 30, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 30, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Leadership General Assembly Meeting"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth Bowling Tournament"
+                    },
+                    StartDate = new DateTime(2017, 11, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Young ladies cooking lessons"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth craft lessons"
+                    },
+                    StartDate = new DateTime(2017, 11, 30, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 30, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Youth choir practice"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Lunch Sunday"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Pancake Breakfast"
+                    },
+                    StartDate = new DateTime(2017, 11, 28, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 28, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Lessons for the youth"
+                    },
+                    StartDate = new DateTime(2017, 11, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Swimming Exercise for parents"
+                    },
+                    StartDate = new DateTime(2017, 11, 27, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 27, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Bingo Tournament"
+                    },
+                    StartDate = new DateTime(2017, 11, 27, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 27, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "BBQ Lunch"
+                    },
+                    StartDate = new DateTime(2017, 11, 29, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 29, 13, 30, 0),
+                    IsActive = true,
+                    EnteredByUsername = "a",
+                },
+                new Event()
+                {
+                    Activity = new Activity()
+                    {
+                        ActivityDescription = "Garage Sale"
+                    },
+                    StartDate = new DateTime(2017, 11, 30, 12, 00, 0),
+                    EndDate = new DateTime(2017, 11, 30, 13, 30, 0),
                     IsActive = true,
                     EnteredByUsername = "a",
                 },
 
+
             };
-            context.SaveChanges();
+            //context.SaveChanges();
             return events;
         }
 
-        public static List<Activity> getActivities()
+        public static List<Activity> GetActivities()
         {
             List<Activity> activities = new List<Activity>()
             {
