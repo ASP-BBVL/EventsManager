@@ -8,15 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using ZenithWebsite.Data;
 using ZenithWebsite.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ZenithWebsite.Controllers
 {
     public class ActivitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ActivitiesController(ApplicationDbContext context)
+        public ActivitiesController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager)
         {
+            _signInManager = signInManager;
             _context = context;
         }
 
@@ -58,10 +61,11 @@ namespace ZenithWebsite.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ActivityCategoryId,ActivityDescription,CreationDate")] Activity activity)
+        public async Task<IActionResult> Create([Bind("ActivityCategoryId,ActivityDescription")] Activity activity)
         {
             if (ModelState.IsValid)
             {
+                _context.Add(activity);
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

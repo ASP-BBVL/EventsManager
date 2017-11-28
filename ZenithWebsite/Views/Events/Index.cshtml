@@ -58,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Activity.ActivityDescription)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a>
+                <a asp-action="Details" asp-route-id="@item.EventId">Details</a><span>&nbsp;</span>
                 @if (User.IsInRole("Admin"))
                 {
                     <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a><span>&nbsp;</span>
