@@ -1,0 +1,47 @@
+
+<div class="calendar-container">
+  <div class="ui borderless top attached inverted menu">
+    <div class="ui item">
+        <h4>Event Schedule</h4>      
+    </div>
+    <div class="ui right aligned item">
+      <div class="ui compact buttons">
+        <button class="tiny ui compact icon primary tiny button" id="calendar-nav--decr" (click)="changeWeek($event)">
+          <i class="chevron left icon"></i>  
+        </button>   
+        <button class="ui compact button" id="calendar-nav--weekof" (click)="changeWeek($event)">{{weekOf}}</button>
+        <button class="tiny ui compact icon primary tiny button" id="calendar-nav--incr" (click)="changeWeek($event)">
+          <i class="chevron right icon"></i>  
+        </button>  
+      </div>
+    </div>
+  </div>
+  
+  <table class="ui compact bottom attached segment unstackable striped celled inverted table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+    </thead>
+    <div class="ui dimmer">
+      <div class="ui loader"></div>
+    </div>
+    <tbody *ngFor="let date of week">
+      <tr class="center aligned">
+        <td colspan=3>{{date.toDateString()}}</td>
+      </tr>
+      <tr>
+        <td>Golf</td>
+        <td>1:00 pm</td>
+        <td>4:00 pm</td>
+      </tr>
+      <tr>
+        <td>Bingo</td>
+        <td>4:00 pm</td>
+        <td>5:00 pm</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
