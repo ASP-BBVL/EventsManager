@@ -1,0 +1,41 @@
+﻿@model Dictionary<DateTime, List<ZenithWebsite.Models.Event>>
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="jumbotron">
+    <h1>Zenith Society</h1>
+    <p>The high-brow club for high-brow elites to be the elitistest elites.</p>
+</div>
+
+<div class="row">
+    <div class="col-lg-offset-1 col-lg-10">
+        <h1>Event Schedule</h1>
+        <table class="table table-default">
+            @foreach (KeyValuePair<DateTime, List<ZenithWebsite.Models.Event>> entry in Model)
+            {
+                <thead>
+                    <tr>
+                        <th colspan="3" style="text-align:center;">@entry.Key.ToString("ddd MMM d yyyy")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in entry.Value)
+                    {
+                        <tr>
+                            <td>@item.StartDate.ToString("hh:mm tt") - @item.EndDate.ToString("hh:mm tt")</td>
+                            <td>@item.Activity.ActivityDescription</td>
+                            <td>@item.EnteredByUsername</td>
+                        </tr>
+                    }
+                    @if (entry.Value.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">No events scheduled for this day.</td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+</div>

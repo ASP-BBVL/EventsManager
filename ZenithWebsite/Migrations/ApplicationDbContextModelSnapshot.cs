@@ -126,7 +126,22 @@ namespace ZenithWebsite.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ZenithWebsite.Data.ApplicationUser", b =>
+            modelBuilder.Entity("ZenithWebsite.Models.Activity", b =>
+                {
+                    b.Property<int>("ActivityCategoryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ActivityDescription")
+                        .IsRequired();
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.HasKey("ActivityCategoryId");
+
+                    b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("ZenithWebsite.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -180,21 +195,6 @@ namespace ZenithWebsite.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ZenithWebsite.Models.Activity", b =>
-                {
-                    b.Property<int>("ActivityCategoryId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ActivityDescription")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.HasKey("ActivityCategoryId");
-
-                    b.ToTable("Activities");
-                });
-
             modelBuilder.Entity("ZenithWebsite.Models.Event", b =>
                 {
                     b.Property<int>("EventId")
@@ -229,7 +229,7 @@ namespace ZenithWebsite.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ZenithWebsite.Data.ApplicationUser")
+                    b.HasOne("ZenithWebsite.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -237,7 +237,7 @@ namespace ZenithWebsite.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ZenithWebsite.Data.ApplicationUser")
+                    b.HasOne("ZenithWebsite.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -250,7 +250,7 @@ namespace ZenithWebsite.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ZenithWebsite.Data.ApplicationUser")
+                    b.HasOne("ZenithWebsite.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -258,7 +258,7 @@ namespace ZenithWebsite.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ZenithWebsite.Data.ApplicationUser")
+                    b.HasOne("ZenithWebsite.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
