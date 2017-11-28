@@ -25,6 +25,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ActivityCategoryId">Edit</a> |
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Edit" asp-route-id="@Model.ActivityCategoryId">Edit</a><span>&nbsp;</span>
+}
     <a asp-action="Index">Back to List</a>
 </div>

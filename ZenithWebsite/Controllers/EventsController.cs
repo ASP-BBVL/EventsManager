@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZenithWebsite.Data;
 using ZenithWebsite.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZenithWebsite.Controllers
 {
@@ -20,6 +21,7 @@ namespace ZenithWebsite.Controllers
         }
 
         // GET: Events
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Events.Include(e => e.Activity);
@@ -46,6 +48,7 @@ namespace ZenithWebsite.Controllers
         }
 
         // GET: Events/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["ActivityCategory"] = new SelectList(_context.Activities, "ActivityCategoryId", "ActivityDescription");
@@ -57,6 +60,7 @@ namespace ZenithWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
         {
             if (ModelState.IsValid)
@@ -70,6 +74,7 @@ namespace ZenithWebsite.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +95,7 @@ namespace ZenithWebsite.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EventId,StartDate,EndDate,EnteredByUsername,ActivityCategory,CreationDate,IsActive")] Event @event)
         {
@@ -123,6 +129,7 @@ namespace ZenithWebsite.Controllers
         }
 
         // GET: Events/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +150,7 @@ namespace ZenithWebsite.Controllers
 
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
