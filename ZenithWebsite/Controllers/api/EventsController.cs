@@ -51,11 +51,17 @@ namespace ZenithWebsite.Controllers.api
                 date = date.AddDays(delta);
             }
             System.Diagnostics.Debug.WriteLine(date.ToShortDateString());
-            while (date.DayOfWeek != DayOfWeek.Sunday)
+            var counter = 0; 
+            while (counter < 7)
             {
-                var events = await _context.Events.Include(e => e.Activity).Where(e => e.StartDate.Day == date.Day && e.StartDate.Month == date.Month && e.StartDate.Year == date.Year && e.IsActive).ToListAsync();
+                var events = await _context.Events
+                    .Include(e => e.Activity)
+                    .Where(e => e.StartDate.Day == date.Day && e.StartDate.Month == date.Month && e.StartDate.Year == date.Year && e.IsActive)
+                    .OrderBy(e => e.StartDate.TimeOfDay)
+                    .ToListAsync();
                 dates.Add(date, events);
                 date = date.AddDays(1);
+                counter++;
             }
             return Ok(dates);
         }
