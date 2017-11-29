@@ -117,7 +117,14 @@ namespace ZenithWebsite
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(ctx, app.ApplicationServices);
+
+            if (ctx.Database.IsSqlite())
+            {
+                if (ctx.Database.EnsureCreated())
+                {
+                    DummyData.Initialize(ctx, app.ApplicationServices);
+                }
+            }
         }
     }
 }
