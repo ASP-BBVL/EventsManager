@@ -10,18 +10,28 @@ export class EventCalendarComponent implements OnInit {
 
   constructor(private _httpService: Http) { }
   
-  apiValues: string[] = [];
+  apiValues: Array<any> = [7]; //processed json
   current: Date = new Date();
   week : Date[] = []; //week runs from Monday to Sunday
   weekOf : string;
 
   ngOnInit() {
     this.initWeek(this.current);
-    
     //get events
-    /*this._httpService.get('/api/values').subscribe(values => {
-      this.apiValues = values.json() as string[];
-    });*/
+    console.log('week', this.week[0].getMonth());
+    this.requestEvents(this.week[0]);
+  }
+
+  requestEvents(date : Date) {
+    this.apiValues = []; //reset 
+    let formattedDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}` //+1 month to get month
+    this._httpService.get(`http://brynvincezenithwebsitefall2017.azurewebsites.net/api/Events/ByWeek?d=${formattedDate}`)
+    .subscribe(values => {
+      let data = values.json() as Array<any>[];
+      for(let item in data) {
+        this.apiValues.push(data[item]);
+      }
+    });
   }
 
   /**
@@ -43,7 +53,7 @@ export class EventCalendarComponent implements OnInit {
       current.setHours(24); //increment
     }
     let firstofweek = this.week[0];
-    this.weekOf = firstofweek.getFullYear() +'/'+firstofweek.getMonth()+'/'+firstofweek.getDate();
+    this.weekOf = firstofweek.getFullYear() +'/'+(firstofweek.getMonth()+1)+'/'+firstofweek.getDate();
   }
 
   copyDate(date : Date) {
@@ -68,5 +78,6 @@ export class EventCalendarComponent implements OnInit {
     }
     this.current = next;
     this.initWeek(this.current);
+    this.requestEvents(this.week[0]);
   }
 }
