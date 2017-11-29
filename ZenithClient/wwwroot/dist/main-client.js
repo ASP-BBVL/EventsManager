@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "de20af786e40a77d1cad"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "acc75341b1582844dda5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1680,7 +1680,7 @@ var EventCalendarComponent = (function () {
         var _this = this;
         this.apiValues = []; //reset 
         var formattedDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(); //+1 month to get month
-        this._httpService.get("http://localhost:50576/api/Events/ByWeek?d=" + formattedDate)
+        this._httpService.get("http://brynvincezenithwebsitefall2017.azurewebsites.net/api/Events/ByWeek?d=" + formattedDate)
             .subscribe(function (values) {
             var data = values.json();
             for (var item in data) {
@@ -2216,13 +2216,13 @@ module.exports = "\n<div class=\"calendar-container\">\n  <div class=\"ui border
 /* 25 */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"home-wrapper\" class=\"ui grid padded\">\n  <div class=\"middle aligned row home-section\" id=\"landing-jumbotron\">\n    <div class=\"center aligned sixteen wide mobile eight wide tablet eight wide computer column\">\n      <div id=\"landing-info\">\n        <h1 class=\"ui header\">\n          Relax, entertain, and be Old. \n          <hr/>\n          <div class=\"sub header\">\n              Take your next retreat to the Zenith Society Resort & Spa conveniently located in the Florida conservation wetlands.\n          </div>\n        </h1>   \n      </div>\n    </div>\n  </div>\n  <div class=\"middle aligned center aligned mobile reversed row home-section\">\n    <app-event-calendar class=\"center aligned top aligned sixteen wide mobile twelve wide tablet ten wide computer column\"></app-event-calendar>\n    <div class=\"left aligned sixteen wide mobile four wide tablet six wide computer column\">\n      <h2 class=\"massive ui center aligned header\">Events happening weekly</h2>\n      <br/><br/>\n      <h3 class=\"ui center aligned header\">\n        Join our active, lively community\n        <div class=\"sub header\">\n          We offer all kinds of events and activities -- we're sure you'll find something you'll love to do at Zenith.\n        </div>\n      </h3>\n      <div id=\"landing-events-info\">\n        <div class=\"left aligned ui horizontal list\" >\n          <br/>\n          <hr/>\n          <br/>\n          <div class=\"item\">\n            <div class=\"header\">Active</div> \n            <div class=\"list\">\n              <div class=\"item\">Horseback Riding</div>\n              <div class=\"item\">Lacrosse</div>\n              <div class=\"item\">Polo</div>\n            </div>\n          </div>\n          <div class=\"item\">\n            <div class=\"header\">Social</div> \n            <div class=\"list\">\n              <div class=\"item\">Monthly Cotillion</div>\n              <div class=\"item\">Keg Party</div>\n              <div class=\"item\">Ice Cream Social</div>\n            </div>\n          </div>\n          <div class=\"item\">\n            <div class=\"header\">Arts & Culture</div> \n            <div class=\"list\">\n              <div class=\"item\">Zenith Art Gallery Tours</div>\n              <div class=\"item\">Cinema</div>\n              <div class=\"item\">Wine Tasting</div>            \n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"centered middle aligned row home-section\">\n    \n  </div>\n</div>";
+module.exports = "<div id=\"home-wrapper\" class=\"ui grid padded\">\n  <div class=\"middle aligned row home-section\" id=\"landing-jumbotron\">\n    <div class=\"center aligned sixteen wide mobile eight wide tablet eight wide computer column\">\n      <div id=\"landing-info\">\n        <h1 class=\"ui header\">\n          Relax, entertain, and be Old. \n          <hr/>\n          <div class=\"sub header\">\n              Take your next retreat to the Zenith Society Resort & Spa conveniently located in the Florida conservation wetlands.\n          </div>\n        </h1>   \n      </div>\n    </div>\n  </div>\n  <div class=\"middle aligned center aligned row home-section\">\n    <app-event-calendar class=\"center aligned top aligned sixteen wide mobile twelve wide tablet ten wide computer column\"></app-event-calendar>\n    <div class=\"left aligned sixteen wide mobile four wide tablet six wide computer column\">\n      <h2 class=\"massive ui center aligned header\">Events happening weekly</h2>\n      <br/><br/>\n      <h3 class=\"ui center aligned header\">\n        Join our active, lively community\n        <div class=\"sub header\">\n          We offer all kinds of events and activities -- we're sure you'll find something you'll love to do at Zenith.\n        </div>\n      </h3>\n      <div id=\"landing-events-info\">\n        <div class=\"left aligned ui horizontal list\" >\n          <br/>\n          <hr/>\n          <br/>\n          <div class=\"item\">\n            <div class=\"header\">Active</div> \n            <div class=\"list\">\n              <div class=\"item\">Horseback Riding</div>\n              <div class=\"item\">Lacrosse</div>\n              <div class=\"item\">Polo</div>\n            </div>\n          </div>\n          <div class=\"item\">\n            <div class=\"header\">Social</div> \n            <div class=\"list\">\n              <div class=\"item\">Monthly Cotillion</div>\n              <div class=\"item\">Keg Party</div>\n              <div class=\"item\">Ice Cream Social</div>\n            </div>\n          </div>\n          <div class=\"item\">\n            <div class=\"header\">Arts & Culture</div> \n            <div class=\"list\">\n              <div class=\"item\">Zenith Art Gallery Tours</div>\n              <div class=\"item\">Cinema</div>\n              <div class=\"item\">Wine Tasting</div>            \n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"centered middle aligned row home-section\">\n    \n  </div>\n</div>";
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu inverted\">\n  <a class=\"item\">Zenith Society</a>\n  <div class=\"right menu\">\n    <a class=\"item\">Register</a>\n    <a class=\"item\">Login</a>\n  </div>\n</div>";
+module.exports = "<div class=\"ui menu inverted\">\n  <a class=\"item\">Zenith Society</a>\n</div>";
 
 /***/ }),
 /* 27 */

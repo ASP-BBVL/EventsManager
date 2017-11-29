@@ -25,7 +25,7 @@ export class EventCalendarComponent implements OnInit {
   requestEvents(date : Date) {
     this.apiValues = []; //reset 
     let formattedDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}` //+1 month to get month
-    this._httpService.get(`http://localhost:50576/api/Events/ByWeek?d=${formattedDate}`)
+    this._httpService.get(`http://brynvincezenithwebsitefall2017.azurewebsites.net/api/Events/ByWeek?d=${formattedDate}`)
     .subscribe(values => {
       let data = values.json() as Array<any>[];
       for(let item in data) {
