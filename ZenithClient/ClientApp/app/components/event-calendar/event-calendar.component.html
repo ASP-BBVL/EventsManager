@@ -28,20 +28,21 @@
     <div class="ui dimmer">
       <div class="ui loader"></div>
     </div>
-    <tbody *ngFor="let date of week">
+    <tbody *ngFor="let date of week; let i = index">
       <tr class="center aligned">
         <td colspan=3>{{date.toDateString()}}</td>
       </tr>
-      <tr>
-        <td>Golf</td>
-        <td>1:00 pm</td>
-        <td>4:00 pm</td>
+      <tr *ngIf="apiValues[i] == undefined || apiValues[i].length == 0 ; else elseBlock">
+        <td colspan=3>No events on this day</td>
       </tr>
-      <tr>
-        <td>Bingo</td>
-        <td>4:00 pm</td>
-        <td>5:00 pm</td>
+      <ng-template #elseBlock>
+        <tr *ngFor="let event of apiValues[i]">
+          <td>{{event.activity.activityDescription}}</td>
+          <td>{{event.startDate.split("T")[1].substr(0,5)}}</td>
+          <td>{{event.endDate.split("T")[1].substr(0,5)}}</td>
         </tr>
+      </ng-template>
+      
     </tbody>
   </table>
 </div>

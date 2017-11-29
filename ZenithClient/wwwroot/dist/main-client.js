@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0af8897b2adf402c5615"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "de20af786e40a77d1cad"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -829,13 +829,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AppComponent = (function () {
     function AppComponent(_httpService) {
         this._httpService = _httpService;
-        this.apiValues = [];
         this.title = 'app';
     }
     AppComponent.prototype.ngOnInit = function () {
-        /*this._httpService.get('/api/values').subscribe(values => {
-            this.apiValues = values.json() as string[];
-        });*/
     };
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1670,16 +1666,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var EventCalendarComponent = (function () {
     function EventCalendarComponent(_httpService) {
         this._httpService = _httpService;
-        this.apiValues = [];
+        this.apiValues = [7]; //processed json
         this.current = new Date();
         this.week = []; //week runs from Monday to Sunday
     }
     EventCalendarComponent.prototype.ngOnInit = function () {
         this.initWeek(this.current);
         //get events
-        /*this._httpService.get('/api/values').subscribe(values => {
-          this.apiValues = values.json() as string[];
-        });*/
+        console.log('week', this.week[0].getMonth());
+        this.requestEvents(this.week[0]);
+    };
+    EventCalendarComponent.prototype.requestEvents = function (date) {
+        var _this = this;
+        this.apiValues = []; //reset 
+        var formattedDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(); //+1 month to get month
+        this._httpService.get("http://localhost:50576/api/Events/ByWeek?d=" + formattedDate)
+            .subscribe(function (values) {
+            var data = values.json();
+            for (var item in data) {
+                _this.apiValues.push(data[item]);
+            }
+        });
     };
     /**
      * Week starts Monday and ends Sunday.
@@ -1700,7 +1707,7 @@ var EventCalendarComponent = (function () {
             current.setHours(24); //increment
         }
         var firstofweek = this.week[0];
-        this.weekOf = firstofweek.getFullYear() + '/' + firstofweek.getMonth() + '/' + firstofweek.getDate();
+        this.weekOf = firstofweek.getFullYear() + '/' + (firstofweek.getMonth() + 1) + '/' + firstofweek.getDate();
     };
     EventCalendarComponent.prototype.copyDate = function (date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -1726,6 +1733,7 @@ var EventCalendarComponent = (function () {
         }
         this.current = next;
         this.initWeek(this.current);
+        this.requestEvents(this.week[0]);
     };
     EventCalendarComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1819,7 +1827,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#wrapper {\r\n    width:100%;\r\n    height:100%;\r\n}\r\n#content-wrapper {\r\n    height:inherit;\r\n    width:inherit;\r\n}", ""]);
+exports.push([module.i, "#wrapper {\n    width:100%;\n    height:100%;\n}\n#content-wrapper {\n    height:inherit;\n    width:inherit;\n}", ""]);
 
 // exports
 
@@ -1833,7 +1841,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, ".calendar-container {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n    height:500px;\r\n    overflow-y:scroll;\r\n    overflow-x:hidden;\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n    .calendar-container {\r\n        width:100%;\r\n        height:300px;\r\n    }\r\n    #calendar-nav--weekof {\r\n        font-size:12px;\r\n        padding-left:6px;\r\n        padding-right:6px;\r\n    }\r\n    app-event-calendar {\r\n        padding-right:0 !important;\r\n    }\r\n}", ""]);
+exports.push([module.i, ".calendar-container {\n    width: 80%;\n    margin: 0 auto;\n    height:500px;\n    overflow-y:scroll;\n    overflow-x:hidden;\n}\n\n@media screen and (max-width: 480px) {\n    .calendar-container {\n        width:100%;\n        height:300px;\n    }\n    #calendar-nav--weekof {\n        font-size:12px;\n        padding-left:6px;\n        padding-right:6px;\n    }\n    app-event-calendar {\n        padding-right:0 !important;\n    }\n}", ""]);
 
 // exports
 
@@ -1847,7 +1855,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#home-wrapper {\r\n    height:100%;\r\n    margin-top:0;\r\n}\r\n#landing-jumbotron {\r\n    background-image: url(\"http://www.clubcorp.com/var/ezflow_site/storage/images/media/clubs/oakmont-media-folder2/images/hmpg-images/2015-updated-photos/oakmontcountryclub-corinth-tx-patio-960x410/10661847-1-eng-US/OakmontCountryClub-Corinth-TX-patio-960x410_rotatingGalleryFront.jpg\");\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    z-index: 3;\r\n    width:100%;\r\n    position:relative;\r\n    height:100%;\r\n}\r\n#landing-jumbotron:after {\r\n    content: \"\";\r\n    height:100%;    \r\n    opacity: 0.6;\r\n    top: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    position: absolute;\r\n    z-index: -1;   \r\n    background: linear-gradient(\r\n        rgba(20,20,20, .2), \r\n        rgba(20,20,20, .6));\r\n}\r\n#landing-info {\r\n    width:80%;\r\n    margin: 0 auto;\r\n    text-align: left;\r\n}\r\n#landing-info > .header, #landing-info > .header > .sub.header {\r\n    color:white;\r\n}\r\n.home-section {\r\n    margin-left:0 !important;\r\n}\r\n.home-section:nth-child(2) {\r\n    min-height:500px;\r\n}\r\n.home-section:nth-child(2) > div, .home-section:nth-child(2) > app-event-calendar {\r\n    margin-top:80px;\r\n    vertical-align:top;\r\n}\r\n#landing-events-info {\r\n    width:80%;\r\n    margin:0 auto;\r\n    text-align:center;\r\n}\r\n@media screen and (max-width: 480px) {\r\n    app-event-calendar {\r\n        padding-right:0 !important;\r\n    }\r\n}", ""]);
+exports.push([module.i, "#home-wrapper {\n    height:100%;\n    margin-top:0;\n}\n#landing-jumbotron {\n    background-image: url(\"http://www.clubcorp.com/var/ezflow_site/storage/images/media/clubs/oakmont-media-folder2/images/hmpg-images/2015-updated-photos/oakmontcountryclub-corinth-tx-patio-960x410/10661847-1-eng-US/OakmontCountryClub-Corinth-TX-patio-960x410_rotatingGalleryFront.jpg\");\n    background-repeat: no-repeat;\n    background-size: cover;\n    z-index: 3;\n    width:100%;\n    position:relative;\n    height:100%;\n}\n#landing-jumbotron:after {\n    content: \"\";\n    height:100%;    \n    opacity: 0.6;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    position: absolute;\n    z-index: -1;   \n    background: linear-gradient(\n        rgba(20,20,20, .2), \n        rgba(20,20,20, .6));\n}\n#landing-info {\n    width:80%;\n    margin: 0 auto;\n    text-align: left;\n}\n#landing-info > .header, #landing-info > .header > .sub.header {\n    color:white;\n}\n.home-section {\n    margin-left:0 !important;\n}\n.home-section:nth-child(2) {\n    min-height:500px;\n}\n.home-section:nth-child(2) > div, .home-section:nth-child(2) > app-event-calendar {\n    margin-top:80px;\n    vertical-align:top;\n}\n#landing-events-info {\n    width:80%;\n    margin:0 auto;\n    text-align:center;\n}\n@media screen and (max-width: 480px) {\n    app-event-calendar {\n        padding-right:0 !important;\n    }\n}", ""]);
 
 // exports
 
@@ -2196,25 +2204,25 @@ module.exports = XmlEntities;
 /* 23 */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div id=\"wrapper\">\r\n  <app-navigation></app-navigation>\r\n  <div id=\"content-wrapper\">\r\n    <app-home></app-home>      \r\n  </div>    \r\n</div>";
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div id=\"wrapper\">\n  <app-navigation></app-navigation>\n  <div id=\"content-wrapper\">\n    <app-home></app-home>      \n  </div>    \n</div>";
 
 /***/ }),
 /* 24 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"calendar-container\">\r\n  <div class=\"ui borderless top attached inverted menu\">\r\n    <div class=\"ui item\">\r\n        <h4>Event Schedule</h4>      \r\n    </div>\r\n    <div class=\"ui right aligned item\">\r\n      <div class=\"ui compact buttons\">\r\n        <button class=\"tiny ui compact icon primary tiny button\" id=\"calendar-nav--decr\" (click)=\"changeWeek($event)\">\r\n          <i class=\"chevron left icon\"></i>  \r\n        </button>   \r\n        <button class=\"ui compact button\" id=\"calendar-nav--weekof\" (click)=\"changeWeek($event)\">{{weekOf}}</button>\r\n        <button class=\"tiny ui compact icon primary tiny button\" id=\"calendar-nav--incr\" (click)=\"changeWeek($event)\">\r\n          <i class=\"chevron right icon\"></i>  \r\n        </button>  \r\n      </div>\r\n    </div>\r\n  </div>\r\n  \r\n  <table class=\"ui compact bottom attached segment unstackable striped celled inverted table\">\r\n    <thead>\r\n      <tr>\r\n        <th>Event</th>\r\n        <th>Start Time</th>\r\n        <th>End Time</th>\r\n      </tr>\r\n    </thead>\r\n    <div class=\"ui dimmer\">\r\n      <div class=\"ui loader\"></div>\r\n    </div>\r\n    <tbody *ngFor=\"let date of week\">\r\n      <tr class=\"center aligned\">\r\n        <td colspan=3>{{date.toDateString()}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>Golf</td>\r\n        <td>1:00 pm</td>\r\n        <td>4:00 pm</td>\r\n      </tr>\r\n      <tr>\r\n        <td>Bingo</td>\r\n        <td>4:00 pm</td>\r\n        <td>5:00 pm</td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n</div>";
+module.exports = "\n<div class=\"calendar-container\">\n  <div class=\"ui borderless top attached inverted menu\">\n    <div class=\"ui item\">\n        <h4>Event Schedule</h4>      \n    </div>\n    <div class=\"ui right aligned item\">\n      <div class=\"ui compact buttons\">\n        <button class=\"tiny ui compact icon primary tiny button\" id=\"calendar-nav--decr\" (click)=\"changeWeek($event)\">\n          <i class=\"chevron left icon\"></i>  \n        </button>   \n        <button class=\"ui compact button\" id=\"calendar-nav--weekof\" (click)=\"changeWeek($event)\">{{weekOf}}</button>\n        <button class=\"tiny ui compact icon primary tiny button\" id=\"calendar-nav--incr\" (click)=\"changeWeek($event)\">\n          <i class=\"chevron right icon\"></i>  \n        </button>  \n      </div>\n    </div>\n  </div>\n  \n  <table class=\"ui compact bottom attached segment unstackable striped celled inverted table\">\n    <thead>\n      <tr>\n        <th>Event</th>\n        <th>Start Time</th>\n        <th>End Time</th>\n      </tr>\n    </thead>\n    <div class=\"ui dimmer\">\n      <div class=\"ui loader\"></div>\n    </div>\n    <tbody *ngFor=\"let date of week; let i = index\">\n      <tr class=\"center aligned\">\n        <td colspan=3>{{date.toDateString()}}</td>\n      </tr>\n      <tr *ngIf=\"apiValues[i] == undefined || apiValues[i].length == 0 ; else elseBlock\">\n        <td colspan=3>No events on this day</td>\n      </tr>\n      <ng-template #elseBlock>\n        <tr *ngFor=\"let event of apiValues[i]\">\n          <td>{{event.activity.activityDescription}}</td>\n          <td>{{event.startDate.split(\"T\")[1].substr(0,5)}}</td>\n          <td>{{event.endDate.split(\"T\")[1].substr(0,5)}}</td>\n        </tr>\n      </ng-template>\n      \n    </tbody>\n  </table>\n</div>";
 
 /***/ }),
 /* 25 */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"home-wrapper\" class=\"ui grid padded\">\r\n  <div class=\"middle aligned row home-section\" id=\"landing-jumbotron\">\r\n    <div class=\"center aligned sixteen wide mobile eight wide tablet eight wide computer column\">\r\n      <div id=\"landing-info\">\r\n        <h1 class=\"ui header\">\r\n          Relax, entertain, and be Old. \r\n          <hr/>\r\n          <div class=\"sub header\">\r\n              Take your next retreat to the Zenith Society Resort & Spa conveniently located in the Florida conservation wetlands.\r\n          </div>\r\n        </h1>   \r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"middle aligned center aligned mobile reversed row home-section\">\r\n    <app-event-calendar class=\"center aligned top aligned sixteen wide mobile twelve wide tablet ten wide computer column\"></app-event-calendar>\r\n    <div class=\"left aligned sixteen wide mobile four wide tablet six wide computer column\">\r\n      <h2 class=\"massive ui center aligned header\">Events happening weekly</h2>\r\n      <br/><br/>\r\n      <h3 class=\"ui center aligned header\">\r\n        Join our active, lively community\r\n        <div class=\"sub header\">\r\n          We offer all kinds of events and activities -- we're sure you'll find something you'll love to do at Zenith.\r\n        </div>\r\n      </h3>\r\n      <div id=\"landing-events-info\">\r\n        <div class=\"left aligned ui horizontal list\" >\r\n          <br/>\r\n          <hr/>\r\n          <br/>\r\n          <div class=\"item\">\r\n            <div class=\"header\">Active</div> \r\n            <div class=\"list\">\r\n              <div class=\"item\">Horseback Riding</div>\r\n              <div class=\"item\">Lacrosse</div>\r\n              <div class=\"item\">Polo</div>\r\n            </div>\r\n          </div>\r\n          <div class=\"item\">\r\n            <div class=\"header\">Social</div> \r\n            <div class=\"list\">\r\n              <div class=\"item\">Monthly Cotillion</div>\r\n              <div class=\"item\">Keg Party</div>\r\n              <div class=\"item\">Ice Cream Social</div>\r\n            </div>\r\n          </div>\r\n          <div class=\"item\">\r\n            <div class=\"header\">Arts & Culture</div> \r\n            <div class=\"list\">\r\n              <div class=\"item\">Zenith Art Gallery Tours</div>\r\n              <div class=\"item\">Cinema</div>\r\n              <div class=\"item\">Wine Tasting</div>            \r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"centered middle aligned row home-section\">\r\n    \r\n  </div>\r\n</div>";
+module.exports = "<div id=\"home-wrapper\" class=\"ui grid padded\">\n  <div class=\"middle aligned row home-section\" id=\"landing-jumbotron\">\n    <div class=\"center aligned sixteen wide mobile eight wide tablet eight wide computer column\">\n      <div id=\"landing-info\">\n        <h1 class=\"ui header\">\n          Relax, entertain, and be Old. \n          <hr/>\n          <div class=\"sub header\">\n              Take your next retreat to the Zenith Society Resort & Spa conveniently located in the Florida conservation wetlands.\n          </div>\n        </h1>   \n      </div>\n    </div>\n  </div>\n  <div class=\"middle aligned center aligned mobile reversed row home-section\">\n    <app-event-calendar class=\"center aligned top aligned sixteen wide mobile twelve wide tablet ten wide computer column\"></app-event-calendar>\n    <div class=\"left aligned sixteen wide mobile four wide tablet six wide computer column\">\n      <h2 class=\"massive ui center aligned header\">Events happening weekly</h2>\n      <br/><br/>\n      <h3 class=\"ui center aligned header\">\n        Join our active, lively community\n        <div class=\"sub header\">\n          We offer all kinds of events and activities -- we're sure you'll find something you'll love to do at Zenith.\n        </div>\n      </h3>\n      <div id=\"landing-events-info\">\n        <div class=\"left aligned ui horizontal list\" >\n          <br/>\n          <hr/>\n          <br/>\n          <div class=\"item\">\n            <div class=\"header\">Active</div> \n            <div class=\"list\">\n              <div class=\"item\">Horseback Riding</div>\n              <div class=\"item\">Lacrosse</div>\n              <div class=\"item\">Polo</div>\n            </div>\n          </div>\n          <div class=\"item\">\n            <div class=\"header\">Social</div> \n            <div class=\"list\">\n              <div class=\"item\">Monthly Cotillion</div>\n              <div class=\"item\">Keg Party</div>\n              <div class=\"item\">Ice Cream Social</div>\n            </div>\n          </div>\n          <div class=\"item\">\n            <div class=\"header\">Arts & Culture</div> \n            <div class=\"list\">\n              <div class=\"item\">Zenith Art Gallery Tours</div>\n              <div class=\"item\">Cinema</div>\n              <div class=\"item\">Wine Tasting</div>            \n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"centered middle aligned row home-section\">\n    \n  </div>\n</div>";
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui menu inverted\">\r\n  <a class=\"item\">Zenith Society</a>\r\n  <div class=\"right menu\">\r\n    <a class=\"item\">Register</a>\r\n    <a class=\"item\">Login</a>\r\n  </div>\r\n</div>";
+module.exports = "<div class=\"ui menu inverted\">\n  <a class=\"item\">Zenith Society</a>\n  <div class=\"right menu\">\n    <a class=\"item\">Register</a>\n    <a class=\"item\">Login</a>\n  </div>\n</div>";
 
 /***/ }),
 /* 27 */
