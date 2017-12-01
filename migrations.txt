@@ -1,0 +1,9 @@
+dotnet clean
+dotnet build
+dotnet ef migrations add Initial
+dotnet ef database update 
+//when you're doing migrations, the Startup cannot be seeding DummyData at the same time.
+//after initil migration, uncomment lines 121 - 127 of startup
+
+npm install //in zenith client
+dotnet run //finally
