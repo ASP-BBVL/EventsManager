@@ -9,6 +9,9 @@ using ZenithWebsite.Data;
 using ZenithWebsite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace ZenithWebsite.Controllers
 {
@@ -16,11 +19,25 @@ namespace ZenithWebsite.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IStringLocalizer<ActivitiesController> _localizer;
 
-        public ActivitiesController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager)
+        public ActivitiesController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager, IStringLocalizer<ActivitiesController> localizer)
         {
             _signInManager = signInManager;
             _context = context;
+            _localizer = localizer;
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
 
         // GET: Activities
@@ -77,6 +94,8 @@ namespace ZenithWebsite.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewData["Title"] = _localizer["Activity"];
+            ViewData["Action"] = _localizer["Edit"];
             if (id == null)
             {
                 return NotFound();

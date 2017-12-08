@@ -8,6 +8,10 @@ using ZenithWebsite.Data;
 using ZenithWebsite.Services;
 using ZenithWebsite.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Globalization;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Options;
 
 namespace ZenithWebsite
 {
@@ -55,13 +59,33 @@ namespace ZenithWebsite
             policy.SupportsCredentials = true;
 
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
+            services.Configure<RequestLocalizationOptions>(opts => {
+                var supportedCultures = new List<CultureInfo> {
+                    new CultureInfo("en"),
+                    new CultureInfo("en-US"),
+                    new CultureInfo("fr"),
+                    new CultureInfo("fr-FR"),
+                    new CultureInfo("zh-CN"),
+                    new CultureInfo("ar-EN"),
+                };
 
+               //opts.DefaultRequestCulture = new RequestCulture("en_US");
+                //formatting numers dates, ect
+                opts.SupportedCultures = supportedCultures;
+                //UI Stirng that we have localized 
+                opts.SupportedUICultures = supportedCultures;
+            });
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
                 })
+            .AddViewLocalization(
+                        LanguageViewLocationExpanderFormat.Suffix,
+                        opts => { opts.ResourcesPath = "Resources"; }
+                    )
+            .AddDataAnnotationsLocalization()
             .AddJsonOptions(
                 options => {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -93,6 +117,10 @@ namespace ZenithWebsite
             }
 
             app.UseStaticFiles();
+
+            var options = app.ApplicationServices.GetServices<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization();
+
 
             app.UseCors("corsGlobalPolicy");
 
